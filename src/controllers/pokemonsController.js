@@ -127,11 +127,16 @@ const createPokemonController = async (
   });
 
   for (const nameType of types) {
-    const type = await Type.create({ name: nameType });
+    const type = await Type.findAll({ 
+      where: {
+        name: nameType
+      }
+     });
     if (type) {
       await newPokemon.addTypes(type);
     }
   }
+
 
   return newPokemon;
 };
